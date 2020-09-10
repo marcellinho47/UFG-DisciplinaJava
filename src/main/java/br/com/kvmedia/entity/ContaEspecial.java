@@ -16,13 +16,19 @@ public class ContaEspecial extends Conta {
 	}
 
 	/* ====================================================================================== */
-	/* MÉTODOS AUXILIARES */
+	/* Mï¿½TODOS AUXILIARES */
 	/* ====================================================================================== */
-	protected void temSaldo() {
+	@Override
+	protected boolean temSaldo(Double valor) {
 
+		Double saldoConsolidado = this.limite + getSaldo();
+
+		return valor <= saldoConsolidado ? true : false;
 	}
 
-	public void abrirConta() {
+	public void abrirConta(Pessoa cliente, Double limite) {
 
+		setCliente(cliente);
+		setLimite(limite);
 	}
 }
