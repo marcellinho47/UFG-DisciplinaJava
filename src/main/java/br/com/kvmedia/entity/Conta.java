@@ -1,10 +1,13 @@
 package br.com.kvmedia.entity;
 
+import br.com.kvmedia.enuns.TipoContaEnum;
+
 public abstract class Conta {
 
 	private Integer nrConta;
 	private Double saldo;
 	private Pessoa cliente;
+	private Integer tipoConta;
 
 	/* ====================================================================================== */
 	/* CONSTRUCTOR */
@@ -33,8 +36,20 @@ public abstract class Conta {
 		this.cliente = cliente;
 	}
 
+	public TipoContaEnum getTipoConta() {
+		return TipoContaEnum.toEnum(this.tipoConta);
+	}
+
+	public void setTipoConta(TipoContaEnum tipoConta) {
+		this.tipoConta = tipoConta.getId();
+	}
+
+	public void setNrConta(Integer nrConta) {
+		this.nrConta = nrConta;
+	}
+
 	/* ====================================================================================== */
-	/* M�TODOS AUXILIARES */
+	/* MÉTODOS AUXILIARES */
 	/* ====================================================================================== */
 	public Double sacar(Double valor) {
 

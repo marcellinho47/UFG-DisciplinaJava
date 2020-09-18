@@ -1,7 +1,7 @@
-package br.com.kvmedia;
+package br.com.kvmedia.service;
 
 import java.time.LocalDate;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.kvmedia.entity.Conta;
@@ -9,39 +9,12 @@ import br.com.kvmedia.entity.ContaEspecial;
 import br.com.kvmedia.entity.ContaPoupanca;
 import br.com.kvmedia.entity.PessoaFisica;
 import br.com.kvmedia.entity.PessoaJuridica;
-import br.com.kvmedia.view.Telas;
 
-public class Main {
+public class ContaService {
 
-	public static void main(String[] args) {
+	public static List<Conta> carregarContas() {
 
-		List<Conta> listaContas = abrirContas();
-
-		Conta conta1 = listaContas.get(0);
-		conta1.depositar(5000.00);
-		conta1.sacar(250.00);
-		conta1.sacar(150.00);
-
-		Conta conta2 = listaContas.get(1);
-		conta2.depositar(1000.00);
-
-		Conta conta3 = listaContas.get(2);
-		conta3.depositar(3500.00);
-		conta3.transferir(500.00, conta2);
-		((ContaPoupanca) conta3).atualizaSaldoRendimento();
-
-		Conta conta4 = listaContas.get(3);
-		conta4.depositar(2000.00);
-		conta4.depositar(500.00);
-		conta4.sacar(200.00);
-
-		relatorioSaldo(listaContas);
-
-		Telas tel = new Telas();
-		tel.abrirMenu();
-	}
-
-	private static List<Conta> abrirContas() {
+		List<Conta> listaContas = new ArrayList<Conta>();
 
 		// ESPECIAL - FISICA --------------------------------------------------------
 		ContaEspecial con01 = new ContaEspecial();
@@ -55,6 +28,7 @@ public class Main {
 		pes01.setCpf("000.000.000-01");
 
 		con01.abrirConta(pes01, 1000.00);
+		listaContas.add(con01);
 
 		// ESPECIAL - JURIDICA -------------------------------------------------------
 		ContaEspecial con02 = new ContaEspecial();
@@ -67,6 +41,7 @@ public class Main {
 		pes02.setCnpj("00.000.000/0000-01");
 
 		con02.abrirConta(pes02, 2000.00);
+		listaContas.add(con02);
 
 		// POUPANCA - FISICA -------------------------------------------------------
 		ContaPoupanca con03 = new ContaPoupanca();
@@ -80,6 +55,7 @@ public class Main {
 		pes03.setCpf("000.000.000-02");
 
 		con03.abrirConta(pes03, 2.5);
+		listaContas.add(con03);
 
 		// POUPANCA - JURIDICA -------------------------------------------------------
 		ContaPoupanca con04 = new ContaPoupanca();
@@ -92,24 +68,42 @@ public class Main {
 		pes04.setCnpj("00.000.000/0000-02");
 
 		con04.abrirConta(pes04, 3.0);
+		listaContas.add(con04);
 
-		return Arrays.asList(con01, con02, con03, con04);
+		return listaContas;
 	}
 
-	private static void relatorioSaldo(List<Conta> listaContas) {
+	public static void relatorioSaldo(List<Conta> listaContas) {
 
-		StringBuilder sb = new StringBuilder("\t\t\tRelatório de Saldo por Cliente\n\n\n");
-		Double saldoTotal = 0.0;
+		StringBuilder sb = new StringBuilder("\t\t\tRelatório de Saldo por Conta\n\n\n");
 
-		for (Conta conta : listaContas) {
+		if (listaContas.size() > 0) {
 
-			sb.append("Nome: ").append(conta.getCliente().getNome()).append("\n");
-			sb.append("Saldo: R$ ").append(conta.getSaldo()).append("\n\n");
+			for (Conta conta : listaContas) {
 
-			saldoTotal = saldoTotal + conta.getSaldo();
+				sb.append("Nome: ").append(conta.getCliente().getNome()).append("\n");
+				sb.append("Saldo: R$ ").append(conta.getSaldo()).append("\n\n");
+
+			}
 		}
 
-		sb.append("\n\nSaldo Total: R$ ").append(saldoTotal);
+		System.out.println(sb.toString());
+	}
+
+	public static void relatorioTotal(List<Conta> listaContas) {
+
+		StringBuilder sb = new StringBuilder("\t\t\tRelatório de Saldo Total\n\n\n");
+		Double saldoTotal = 0.0;
+
+		if (listaContas.size() > 0) {
+
+			for (Conta conta : listaContas) {
+
+				saldoTotal = saldoTotal + conta.getSaldo();
+			}
+		}
+
+		sb.append("Saldo Total: R$ ").append(saldoTotal);
 
 		System.out.println(sb.toString());
 	}
