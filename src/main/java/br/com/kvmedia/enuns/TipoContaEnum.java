@@ -4,11 +4,8 @@ public enum TipoContaEnum {
 
 	SIMPLES(1, "Simples"), EXECUTIVA(2, "Executiva"), PREMIUM(3, "Premium"), PERSONALITE(4, "Personalité");
 
-	private Integer id;
-	private String descricao;
-
 	private int id;
-	private String description;
+	private String descricao;
 
 	/* ====================================================================================== */
 	/* CONSTRUCTOR */
