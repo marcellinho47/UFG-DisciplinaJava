@@ -21,6 +21,7 @@ public class Telas {
 	public Telas() {
 
 		this.listaContas = ContaService.carregarContas();
+		this.listaClientesSemConta = PessoaService.carregarPessoas();
 		this.scan = new Scanner(System.in);
 	}
 
