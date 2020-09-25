@@ -1,0 +1,30 @@
+USE DisciplinaJava
+GO
+
+
+CREATE TABLE Fabricantes (
+
+	ID_Fabricante INT NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	DESC_Fabricante VARCHAR(60) NOT NULL
+);
+
+CREATE TABLE Modelos (
+
+	ID_Modelo INT NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	DESC_Modelo VARCHAR(60) NOT NULL,
+	ID_Fabricante INT NOT NULL,
+
+	FOREIGN KEY (ID_Fabricante) REFERENCES Fabricantes (ID_Fabricante)
+);
+
+CREATE TABLE Carros (
+
+	ID_Carro INT NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	NUMR_TipoCarro INT NOT NULL,
+	DESC_Placa VARCHAR(12) NOT NULL,
+	NUMR_Ano INT NOT NULL,
+	DESC_Cor VARCHAR(20) NOT NULL,
+	ID_Modelo INT NOT NULL
+
+	FOREIGN KEY (ID_Modelo) REFERENCES Modelos(ID_Modelo)
+);
