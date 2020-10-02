@@ -1,8 +1,22 @@
 package br.com.kvmedia.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Fabricantes")
 public class Fabricante {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID_Fabricante")
 	private Integer idFabricante;
+
+	@Column(name = "DESC_Fabricante")
 	private String descFabricante;
 
 	/* ====================================================================================== */

@@ -1,9 +1,30 @@
 package br.com.kvmedia.entity;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Modelos")
 public class Modelo {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID_Modelo")
 	private Integer idModelo;
+
+	@Column(name = "DESC_Modelo")
 	private String descModelo;
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "ID_Fabricante")
 	private Fabricante fabricante;
 
 	/* ====================================================================================== */

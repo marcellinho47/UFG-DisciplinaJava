@@ -1,27 +1,36 @@
 package br.com.kvmedia;
 
-import br.com.kvmedia.dao.FabricanteDAO;
-import br.com.kvmedia.entity.Fabricante;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import br.com.kvmedia.entity.Carro;
+import br.com.kvmedia.entity.Modelo;
+import br.com.kvmedia.repository.CarroRepository;
+import br.com.kvmedia.repository.ModeloRepository;
 
 public class Main {
 
 	public static void main(String[] args) {
 		try {
 
-			// Telas tel = new Telas();
-			// tel.abrirMenu();
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory("aula-jpa");
+			EntityManager em = emf.createEntityManager();
 
-			FabricanteDAO dao = new FabricanteDAO();
-			dao.delete(3);
+			ModeloRepository modeloRepository = new ModeloRepository(em);
+			Modelo modelo = modeloRepository.select(1);
 
-			Fabricante fabricante = new Fabricante();
-			fabricante.setDescFabricante("FIAT");
-			dao.insert(fabricante);
+			CarroRepository carroRepository = new CarroRepository(em);
+			Carro carro = carroRepository.select(2);
 
-			Fabricante fb = new Fabricante();
-			fb.setIdFabricante(1);
-			fb.setDescFabricante("MERCEDES BENZ");
-			fb = dao.update(fb);
+			carro = new Carro(null, 1, "GOL1234", 2020, "Azul", modelo);
+			carroRepository.insert(carro);
+			Carro carro2 = carroRepository.select(2);
+
+			carro2.setAno(3030);
+			carroRepository.update(carro2);
+
+			carroRepository.delete(carro2);
 
 		} catch (Exception e) {
 			e.printStackTrace();
