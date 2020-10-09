@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Fabricantes")
-public class Fabricante {
+public class FabricanteEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +22,11 @@ public class Fabricante {
 	/* ====================================================================================== */
 	/* CONSTRUCTOR */
 	/* ====================================================================================== */
-	public Fabricante() {
+	public FabricanteEntity() {
 		super();
 	}
 
-	public Fabricante(Integer idFabricante, String descFabricante) {
+	public FabricanteEntity(Integer idFabricante, String descFabricante) {
 		super();
 		this.idFabricante = idFabricante;
 		this.descFabricante = descFabricante;
@@ -71,7 +71,7 @@ public class Fabricante {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Fabricante other = (Fabricante) obj;
+		FabricanteEntity other = (FabricanteEntity) obj;
 		if (descFabricante == null) {
 			if (other.descFabricante != null)
 				return false;

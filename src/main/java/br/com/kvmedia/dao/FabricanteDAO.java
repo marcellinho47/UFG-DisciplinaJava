@@ -5,11 +5,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import br.com.kvmedia.entity.Fabricante;
+import br.com.kvmedia.entity.FabricanteEntity;
 
 public class FabricanteDAO {
 
-	public void insert(Fabricante fabricante) throws SQLException {
+	public void insert(FabricanteEntity fabricante) throws SQLException {
 
 		Connection connection = DatabaseConnectionDAO.getConnection();
 		Statement statement = connection.createStatement();
@@ -18,7 +18,7 @@ public class FabricanteDAO {
 		statement.close();
 	}
 
-	public Fabricante update(Fabricante novoFabricante) throws SQLException {
+	public FabricanteEntity update(FabricanteEntity novoFabricante) throws SQLException {
 
 		Connection connection = DatabaseConnectionDAO.getConnection();
 		Statement statement = connection.createStatement();
@@ -26,7 +26,7 @@ public class FabricanteDAO {
 		statement.execute("UPDATE Fabricantes SET DESC_Fabricante = '" + novoFabricante.getDescFabricante() + "' WHERE ID_Fabricante = " + novoFabricante.getIdFabricante() + ";");
 		statement.close();
 
-		Fabricante fb = select(novoFabricante.getIdFabricante());
+		FabricanteEntity fb = select(novoFabricante.getIdFabricante());
 		return fb;
 	}
 
@@ -39,7 +39,7 @@ public class FabricanteDAO {
 		statement.close();
 	}
 
-	public Fabricante select(Integer idFabricante) throws SQLException {
+	public FabricanteEntity select(Integer idFabricante) throws SQLException {
 
 		Connection connection = DatabaseConnectionDAO.getConnection();
 		Statement statement = connection.createStatement();
@@ -51,7 +51,7 @@ public class FabricanteDAO {
 		}
 		resultSet.next();
 
-		Fabricante fb = new Fabricante();
+		FabricanteEntity fb = new FabricanteEntity();
 		fb.setIdFabricante(resultSet.getInt("ID_Fabricante"));
 		fb.setDescFabricante(resultSet.getString("DESC_Fabricante"));
 

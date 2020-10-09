@@ -4,15 +4,15 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import br.com.kvmedia.entity.Carro;
+import br.com.kvmedia.entity.CarroEntity;
 
 public class CarroDAO {
 
-	public void insert(Carro carro) {
+	public void insert(CarroEntity carro) {
 
 	}
 
-	public void update(Carro novoCarro) {
+	public void update(CarroEntity novoCarro) {
 
 	}
 
@@ -23,7 +23,7 @@ public class CarroDAO {
 		statement.execute("DELETE FROM Carros WHERE ID_Carro = " + idCarro);
 	}
 
-	public Carro select(Integer idCarro) {
+	public CarroEntity select(Integer idCarro) {
 		return null;
 	}
 }

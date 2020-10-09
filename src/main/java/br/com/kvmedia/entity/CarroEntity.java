@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Carros")
-public class Carro {
+public class CarroEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,16 +34,16 @@ public class Carro {
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_Modelo")
-	private Modelo modelo;
+	private ModeloEntity modelo;
 
 	/* ====================================================================================== */
 	/* CONSTRUCTOR */
 	/* ====================================================================================== */
-	public Carro() {
+	public CarroEntity() {
 		super();
 	}
 
-	public Carro(Integer idCarro, Integer tipoCarro, String placa, Integer ano, String cor, Modelo modelo) {
+	public CarroEntity(Integer idCarro, Integer tipoCarro, String placa, Integer ano, String cor, ModeloEntity modelo) {
 		super();
 		this.idCarro = idCarro;
 		this.tipoCarro = tipoCarro;
@@ -96,11 +96,11 @@ public class Carro {
 		this.cor = cor;
 	}
 
-	public Modelo getModelo() {
+	public ModeloEntity getModelo() {
 		return modelo;
 	}
 
-	public void setModelo(Modelo modelo) {
+	public void setModelo(ModeloEntity modelo) {
 		this.modelo = modelo;
 	}
 
@@ -128,7 +128,7 @@ public class Carro {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Carro other = (Carro) obj;
+		CarroEntity other = (CarroEntity) obj;
 		if (ano == null) {
 			if (other.ano != null)
 				return false;

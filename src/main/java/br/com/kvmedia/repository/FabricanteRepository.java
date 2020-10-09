@@ -1,41 +1,11 @@
 package br.com.kvmedia.repository;
 
-import javax.persistence.EntityManager;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import br.com.kvmedia.entity.Fabricante;
+import br.com.kvmedia.entity.FabricanteEntity;
 
-public class FabricanteRepository {
+@Repository
+public interface FabricanteRepository extends JpaRepository<FabricanteEntity, Integer> {
 
-	private EntityManager em;
-
-	public FabricanteRepository(EntityManager em) {
-		this.em = em;
-	}
-
-	public void insert(Fabricante fabricante) {
-
-		em.getTransaction().begin();
-		em.persist(fabricante);
-		em.getTransaction().commit();
-	}
-
-	public Fabricante update(Fabricante fabricante) {
-
-		em.getTransaction().begin();
-		Fabricante retFabricante = em.merge(fabricante);
-		em.getTransaction().commit();
-
-		return retFabricante;
-	}
-
-	public void delete(Fabricante fabricante) {
-
-		em.getTransaction().begin();
-		em.remove(fabricante);
-		em.getTransaction().commit();
-	}
-
-	public Fabricante select(Integer idFabricante) {
-		return em.find(Fabricante.class, idFabricante);
-	}
 }

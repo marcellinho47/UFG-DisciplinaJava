@@ -5,12 +5,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import br.com.kvmedia.entity.Fabricante;
-import br.com.kvmedia.entity.Modelo;
+import br.com.kvmedia.entity.FabricanteEntity;
+import br.com.kvmedia.entity.ModeloEntity;
 
 public class ModeloDAO {
 
-	public void insert(Modelo modelo) throws SQLException {
+	public void insert(ModeloEntity modelo) throws SQLException {
 
 		Connection connection = DatabaseConnectionDAO.getConnection();
 		Statement statement = connection.createStatement();
@@ -19,7 +19,7 @@ public class ModeloDAO {
 		statement.close();
 	}
 
-	public Modelo update(Modelo novoModelo) throws SQLException {
+	public ModeloEntity update(ModeloEntity novoModelo) throws SQLException {
 
 		Connection connection = DatabaseConnectionDAO.getConnection();
 		Statement statement = connection.createStatement();
@@ -27,7 +27,7 @@ public class ModeloDAO {
 		statement.execute("UPDATE Modelos SET DESC_Modelo = '" + novoModelo.getDescModelo() + "' WHERE ID_Modelo = " + novoModelo.getIdModelo() + ";");
 		statement.close();
 
-		Modelo md = select(novoModelo.getIdModelo());
+		ModeloEntity md = select(novoModelo.getIdModelo());
 		return md;
 	}
 
@@ -40,7 +40,7 @@ public class ModeloDAO {
 		statement.close();
 	}
 
-	public Modelo select(Integer idModelo) throws SQLException {
+	public ModeloEntity select(Integer idModelo) throws SQLException {
 
 		Connection connection = DatabaseConnectionDAO.getConnection();
 		Statement statement = connection.createStatement();
@@ -52,13 +52,13 @@ public class ModeloDAO {
 		}
 		resultSet.next();
 
-		Modelo fb = new Modelo();
+		ModeloEntity fb = new ModeloEntity();
 		fb.setIdModelo(resultSet.getInt("ID_Modelo"));
 		fb.setDescModelo(resultSet.getString("DESC_Modelo"));
 
 		int idFabricante = resultSet.getInt("ID_Fabricante");
 		FabricanteDAO dao = new FabricanteDAO();
-		Fabricante fabricante = dao.select(idFabricante);
+		FabricanteEntity fabricante = dao.select(idFabricante);
 		fb.setFabricante(fabricante);
 
 		statement.close();

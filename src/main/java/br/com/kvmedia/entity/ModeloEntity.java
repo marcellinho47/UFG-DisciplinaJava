@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Modelos")
-public class Modelo {
+public class ModeloEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,16 +25,16 @@ public class Modelo {
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_Fabricante")
-	private Fabricante fabricante;
+	private FabricanteEntity fabricante;
 
 	/* ====================================================================================== */
 	/* CONSTRUCTOR */
 	/* ====================================================================================== */
-	public Modelo() {
+	public ModeloEntity() {
 		super();
 	}
 
-	public Modelo(Integer idModelo, String descModelo, Fabricante fabricante) {
+	public ModeloEntity(Integer idModelo, String descModelo, FabricanteEntity fabricante) {
 		super();
 		this.idModelo = idModelo;
 		this.descModelo = descModelo;
@@ -60,11 +60,11 @@ public class Modelo {
 		this.descModelo = descModelo;
 	}
 
-	public Fabricante getFabricante() {
+	public FabricanteEntity getFabricante() {
 		return fabricante;
 	}
 
-	public void setFabricante(Fabricante fabricante) {
+	public void setFabricante(FabricanteEntity fabricante) {
 		this.fabricante = fabricante;
 	}
 
@@ -89,7 +89,7 @@ public class Modelo {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Modelo other = (Modelo) obj;
+		ModeloEntity other = (ModeloEntity) obj;
 		if (descModelo == null) {
 			if (other.descModelo != null)
 				return false;
