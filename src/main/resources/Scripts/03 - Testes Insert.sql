@@ -1,3 +1,6 @@
+USE DisciplinaJava
+GO
+
 
 INSERT INTO Fabricantes VALUES ('MERCEDES')
 INSERT INTO Modelos VALUES ('180', 1), ('250', 1), ('300', 1)
